@@ -7,6 +7,8 @@ export const QuizCard = ({
   playerAnswer,
   questionNum,
   timeOut,
+  noAnswer,
+  setNoAnswer,
   callBack,
 }) => (
   <Wrapper>
@@ -18,7 +20,9 @@ export const QuizCard = ({
           key={answer}
           correct={playerAnswer?.correctAnswer === answer}
           playerClicked={playerAnswer?.answer === answer}
-          timeOut={playerAnswer?.answer === timeOut}>
+          noAnswer={playerAnswer?.answer === null}
+          timeOut={timeOut !== !answer}>
+          {console.log(timeOut !== !answer && playerAnswer?.answer === null)}
           <button
             disabled={playerAnswer ? true : false}
             value={answer}

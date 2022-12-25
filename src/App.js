@@ -27,6 +27,7 @@ function App() {
     setCorrect(0);
     setWrong(0);
     setLoading(false);
+    setTimeOut(false);
   };
 
   const checkAnswer = (event) => {
@@ -40,7 +41,10 @@ function App() {
       // Add score if answer is correct
       if (correct) setCorrect((prev) => prev + 1);
       if (!correct) setWrong((prev) => prev + 1);
-      if (timeOut) setWrong((prev) => prev + 1);
+      // if (noAnswer) {
+      //   setNoAnswer(true);
+      //   setWrong((prev) => prev + 1);
+      // }
 
       const answerObj = {
         question: questions[number].questions,
@@ -75,7 +79,7 @@ function App() {
             start
           </button>
         ) : null}
-        {!gameOver ? (
+        {!gameOver && !loading ? (
           <p className='score'>
             Score: {correct} / {wrong}
           </p>
@@ -90,14 +94,16 @@ function App() {
             question={questions[number].question}
             answers={questions[number].answers}
             playerAnswer={playerAnswers ? playerAnswers[number] : undefined}
-            noAnswer={noAnswer}
+            noAnswer={setNoAnswer}
+            timeOut={timeOut}
             callBack={checkAnswer}
           />
         )}
         {!gameOver &&
         !loading &&
         playerAnswers.length === number + 1 &&
-        number !== questions.length - 1 ? (
+        number !== questions.length - 1 &&
+        timeOut ? (
           <button className='next' onClick={nextQuestion}>
             Next
           </button>

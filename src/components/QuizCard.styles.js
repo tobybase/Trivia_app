@@ -28,7 +28,7 @@ export const ButtonWrapper = styled.div`
     width: 100%;
     height: 40px;
     margin: 5px 0;
-    background: ${({ correct, playerClicked, noAnswer }) =>
+    background: ${({ correct, playerClicked, timeOut, noAnswer }) =>
       correct
         ? 'linear-gradient(90deg, #56FFA4, #59BC86)'
         : !correct && playerClicked
